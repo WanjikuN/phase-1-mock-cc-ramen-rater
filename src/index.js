@@ -19,16 +19,44 @@ const submitRaman = (raman) =>{
         let image = document.getElementsByClassName('detail-image')[0];
         let comment = document.getElementById("comment-display");
         let rating = document.getElementById("rating-display");
+        let btn = document.createElement('button');
+        let p = document.createElement('p');
+        btn.addEventListener("click", () => {
+            fetch(`http://localhost:3000/ramens/${d.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+               })
+            .then(resp => {
+                if(resp.ok){
+                    alert (`${d.name} deleted successfully`)
+                    // reload page
+                    window.location.reload();
+                }else{
+                    alert (`Error when deleting ${d.name} `)
+                }
+
+                    })
+                })
+        
         image.setAttribute("src", d.image );
         rating.textContent = d.rating;
         comment.textContent = d.comment;
         h2.textContent = d.name;
         h3.innerText = d.restaurant;
+
+        btn.textContent = ` X`
+        btn.style.color = "red"
+        p.appendChild(btn);
+        comment.appendChild(p);
     });
     menu.appendChild(images);
     })
     
 }
+
+
 // Using POST method
 let newObj;
 const formSubmit = (e) => {
@@ -53,9 +81,10 @@ const formSubmit = (e) => {
     .then(resp => resp.json())
     .then(data => console.log(data))
     form.reset();
-    
+    window.location.reload();
 }
 let form = document.getElementById("new-ramen");
 form.addEventListener('submit', formSubmit);
 
+// DELETE method
 
