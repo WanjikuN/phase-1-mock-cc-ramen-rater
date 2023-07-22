@@ -15,31 +15,15 @@ const submitRaman = (raman) =>{
     raman.forEach(d => {
     let images = document.createElement('img');
     images.setAttribute("src",d.image);
+    // Handle single image display
     images.addEventListener('click', () => {
         let image = document.getElementsByClassName('detail-image')[0];
         let comment = document.getElementById("comment-display");
         let rating = document.getElementById("rating-display");
         let btn = document.createElement('button');
         let p = document.createElement('p');
-        btn.addEventListener("click", () => {
-            fetch(`http://localhost:3000/ramens/${d.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-               })
-            .then(resp => {
-                if(resp.ok){
-                    alert (`${d.name} deleted successfully`)
-                    // reload page
-                    window.location.reload();
-                }else{
-                    alert (`Error when deleting ${d.name} `)
-                }
-
-                    })
-                })
         
+        btn.addEventListener("click", handleDelete)
         image.setAttribute("src", d.image );
         rating.textContent = d.rating;
         comment.textContent = d.comment;
@@ -50,8 +34,30 @@ const submitRaman = (raman) =>{
         btn.style.color = "red"
         p.appendChild(btn);
         comment.appendChild(p);
+
+    
     });
+
     menu.appendChild(images);
+    // DELETE method
+    const handleDelete = () => {
+        fetch(`http://localhost:3000/ramens/${d.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+           })
+        .then(resp => {
+            if(resp.ok){
+                alert (`${d.name} deleted successfully`)
+                // reload page
+                window.location.reload();
+            }else{
+                alert (`Error when deleting ${d.name} `)
+            }
+
+                })
+            }
     })
     
 }
@@ -73,18 +79,21 @@ const formSubmit = (e) => {
         rating: `${rating}`,
         comment: `${comment}`
     }
-    fetch("http://localhost:3000/ramens",{
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(newObj)
-    })
-    .then(resp => resp.json())
-    .then(data => console.log(data))
+    handleCreate(newObj)
     form.reset();
     window.location.reload();
 }
 let form = document.getElementById("new-ramen");
 form.addEventListener('submit', formSubmit);
+//  POST Method
+const handleCreate = (newObj) =>{
+    return fetch("http://localhost:3000/ramens",{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newObj)
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+} 
 
-// DELETE method
 
