@@ -12,33 +12,93 @@ const submitRaman = (raman) =>{
     let h2 = document.querySelector(".name");
     let h3 = document.querySelector(".restaurant");
     
+    
     raman.forEach(d => {
-    let images = document.createElement('img');
-    images.setAttribute("src",d.image);
-    // Handle single image display
-    images.addEventListener('click', () => {
-        let image = document.getElementsByClassName('detail-image')[0];
         let comment = document.getElementById("comment-display");
         let rating = document.getElementById("rating-display");
-        let btn = document.createElement('button');
-        let p = document.createElement('p');
+       
+    let images = document.createElement('img');
+    images.setAttribute("src",d.image);
+    
+    images.addEventListener('click', singleImageDisplay);
+
+    menu.appendChild(images);
+    // update
+    const handleUpdate = () => {
         
+        // ratingInput.placeholder = d.rating;
+        rating.innerHTML = `
+        <input type="text" id="ratingUpdate" name="ratingUpdate" value=${d.rating}>
+        `
+        comment.innerHTML = `
+        <input type="text" id="commentUpdate" name="commentUpdate" value=${d.comment}>
+        `
+        
+        
+        // let h3Rating = document.getElementsByTagName('h3')[2]
+        // h3Rating.style.display = 'flex'
+        // h3Rating.style.flexDirection = 'column-reverse'
+       document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            let ratingUpd = document.getElementById('ratingUpdate').value;
+            let commentUpd = document.getElementById('commentUpdate').value;
+
+            newUpdateObj = {
+                rating: `${ratingUpd}`,
+                comment: `${commentUpd}`
+            }
+                      
+             fetch(`http://localhost:3000/ramens/${d.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                        },
+                body: JSON.stringify(newUpdateObj),
+            })
+            .then(res => res.json())
+            // Update DOM with new data
+            
+            d.rating = ratingUpd;
+            d.comment = commentUpd;
+            // window.location.reload();
+            setTimeout(100)
+            singleImageDisplay(d.rating, d.comment);
+            
+            
+        }
+            })
+        }
+    //    })
+
+        
+    // }
+    // Handle single image display
+    function singleImageDisplay(){
+        let image = document.getElementsByClassName('detail-image')[0];
+        let btn = document.createElement('button');
+        let editBtn = document.createElement('button');
+        let p = document.createElement('p');
+        p.setAttribute("id", "image-button");
         btn.addEventListener("click", handleDelete)
+        editBtn.addEventListener("click", handleUpdate)
         image.setAttribute("src", d.image );
         rating.textContent = d.rating;
         comment.textContent = d.comment;
         h2.textContent = d.name;
         h3.innerText = d.restaurant;
-
+    
         btn.textContent = ` X`
         btn.style.color = "red"
+        btn.style.cursor = "pointer"
         p.appendChild(btn);
+        editBtn.textContent = "Edit";
+        editBtn.style.cursor = "pointer"
+        p.appendChild(editBtn);
         comment.appendChild(p);
-
+        
     
-    });
-
-    menu.appendChild(images);
+    
+    }
     // DELETE method
     const handleDelete = () => {
         fetch(`http://localhost:3000/ramens/${d.id}`, {
@@ -61,6 +121,7 @@ const submitRaman = (raman) =>{
     })
     
 }
+
 
 
 // Using POST method
@@ -96,4 +157,4 @@ const handleCreate = (newObj) =>{
         .then(data => console.log(data))
 } 
 
-
+// 
