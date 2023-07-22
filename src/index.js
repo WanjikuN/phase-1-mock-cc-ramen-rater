@@ -31,7 +31,7 @@ const submitRaman = (raman) =>{
         <input type="text" id="ratingUpdate" name="ratingUpdate" value=${d.rating}>
         `
         comment.innerHTML = `
-        <input type="text" id="commentUpdate" name="commentUpdate" value=${d.comment}>
+        <input type="text" id="commentUpdate" name="commentUpdate" value="${d.comment}">
         `
         
         
