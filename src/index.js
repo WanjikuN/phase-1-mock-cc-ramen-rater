@@ -24,7 +24,40 @@ const submitRaman = (raman) =>{
 
     menu.appendChild(images);
     // update
-    const handleUpdate = () => {
+   
+    //    })
+
+        
+    // }
+    // Handle single image display
+    function singleImageDisplay(){
+        let image = document.getElementsByClassName('detail-image')[0];
+        let btn = document.createElement('button');
+        let editBtn = document.createElement('button');
+        let p = document.createElement('p');
+        p.setAttribute("id", "image-button");
+        btn.addEventListener("click", handleDelete)
+        editBtn.addEventListener("click", handleUpdate)
+        image.setAttribute("src", d.image );
+        rating.textContent = d.rating;
+        comment.textContent = d.comment;
+        h2.textContent = d.name;
+        h3.innerText = d.restaurant;
+    
+        btn.textContent = ` X`
+        btn.style.color = "red"
+        btn.style.cursor = "pointer"
+        p.appendChild(btn);
+        editBtn.textContent = "Edit";
+        editBtn.style.cursor = "pointer"
+        p.appendChild(editBtn);
+        comment.appendChild(p);
+        
+    
+    
+    }
+    // update
+    function handleUpdate(){
         
         // ratingInput.placeholder = d.rating;
         rating.innerHTML = `
@@ -60,45 +93,16 @@ const submitRaman = (raman) =>{
             
             d.rating = ratingUpd;
             d.comment = commentUpd;
+            // alert("Successfully updated")
             // window.location.reload();
-            setTimeout(100)
-            singleImageDisplay(d.rating, d.comment);
+            
+            // singleImageDisplay(d.rating, d.comment);
+            
             
             
         }
             })
         }
-    //    })
-
-        
-    // }
-    // Handle single image display
-    function singleImageDisplay(){
-        let image = document.getElementsByClassName('detail-image')[0];
-        let btn = document.createElement('button');
-        let editBtn = document.createElement('button');
-        let p = document.createElement('p');
-        p.setAttribute("id", "image-button");
-        btn.addEventListener("click", handleDelete)
-        editBtn.addEventListener("click", handleUpdate)
-        image.setAttribute("src", d.image );
-        rating.textContent = d.rating;
-        comment.textContent = d.comment;
-        h2.textContent = d.name;
-        h3.innerText = d.restaurant;
-    
-        btn.textContent = ` X`
-        btn.style.color = "red"
-        btn.style.cursor = "pointer"
-        p.appendChild(btn);
-        editBtn.textContent = "Edit";
-        editBtn.style.cursor = "pointer"
-        p.appendChild(editBtn);
-        comment.appendChild(p);
-        
-    
-    
-    }
     // DELETE method
     const handleDelete = () => {
         fetch(`http://localhost:3000/ramens/${d.id}`, {
