@@ -1,7 +1,7 @@
 // write your code here
 // Using GET method
 const newRamen = () =>{
-    return fetch("https://30bd-196-97-94-107.ngrok-free.app/ramens")
+    return fetch("https://localhost:3000/ramens")
     .then(res => res.json())
     .then(data => submitRaman(data))
 }
@@ -81,7 +81,7 @@ const submitRaman = (raman) =>{
                 comment: `${commentUpd}`
             }
                       
-             fetch(`https://30bd-196-97-94-107.ngrok-free.app/ramens/${d.id}`, {
+             fetch(`https://localhost:3000/ramens/${d.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ const submitRaman = (raman) =>{
         }
     // DELETE method
     const handleDelete = () => {
-        fetch(`https://30bd-196-97-94-107.ngrok-free.app/ramens/${d.id}`, {
+        fetch(`https://localhost:3000/ramens/${d.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ let form = document.getElementById("new-ramen");
 form.addEventListener('submit', formSubmit);
 //  POST Method
 const handleCreate = (newObj) =>{
-    return fetch("https://30bd-196-97-94-107.ngrok-free.app/ramens",{
+    return fetch("https://localhost:3000/ramens",{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newObj)
