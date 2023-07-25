@@ -7,13 +7,13 @@ const newRamen = () =>{
 }
 console.log(newRamen());
 
-const submitRaman = (raman) =>{
+const submitRaman = (data) =>{
     let menu = document.getElementById("ramen-menu");
     let h2 = document.querySelector(".name");
     let h3 = document.querySelector(".restaurant");
     
     
-    raman.forEach(d => {
+    data.forEach(d => {
         let comment = document.getElementById("comment-display");
         let rating = document.getElementById("rating-display");
        
