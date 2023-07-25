@@ -1,7 +1,7 @@
 // write your code here
 // Using GET method
 const newRamen = () =>{
-    return fetch("https://localhost:3000/ramens")
+    return fetch("https://wanjikun.github.io/phase-1-mock-cc-ramen-rater/db.json/ramens")
     .then(res => res.json())
     .then(data => submitRaman(data))
 }
@@ -81,7 +81,7 @@ const submitRaman = (raman) =>{
                 comment: `${commentUpd}`
             }
                       
-             fetch(`https://localhost:3000/ramens/${d.id}`, {
+             fetch(`https://wanjikun.github.io/phase-1-mock-cc-ramen-rater/db.json/ramens/${d.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ const submitRaman = (raman) =>{
         }
     // DELETE method
     const handleDelete = () => {
-        fetch(`https://localhost:3000/ramens/${d.id}`, {
+        fetch(`https://wanjikun.github.io/phase-1-mock-cc-ramen-rater/db.json/ramens/${d.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ let form = document.getElementById("new-ramen");
 form.addEventListener('submit', formSubmit);
 //  POST Method
 const handleCreate = (newObj) =>{
-    return fetch("https://localhost:3000/ramens",{
+    return fetch("https://wanjikun.github.io/phase-1-mock-cc-ramen-rater/db.json/ramens",{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newObj)
