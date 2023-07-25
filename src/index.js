@@ -13,7 +13,7 @@ const submitRaman = (ramen) =>{
     let h3 = document.querySelector(".restaurant");
     
     
-    ramen.forEach(d => {
+    ramen.ramens.forEach(d => {
         let comment = document.getElementById("comment-display");
         let rating = document.getElementById("rating-display");
        
