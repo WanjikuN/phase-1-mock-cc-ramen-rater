@@ -81,7 +81,7 @@ const submitRaman = (raman) =>{
                 comment: `${commentUpd}`
             }
                       
-             fetch(`http://localhost:3000/ramens/${d.id}`, {
+             fetch(`https://9d2b-196-97-94-107.ngrok-free.app/ramens/${d.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
