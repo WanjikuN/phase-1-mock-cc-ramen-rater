@@ -1,7 +1,7 @@
 // write your code here
 // Using GET method
 const newRamen = () =>{
-    return fetch("https://json-server-db-three.vercel.app/ramens")
+    return fetch("https://json-server-ogfs.onrender.com/ramens")
     .then(res => res.json())
     .then(data => submitRaman(data))
 }
@@ -81,7 +81,7 @@ const submitRaman = (ramen) =>{
                 comment: `${commentUpd}`
             }
                       
-             fetch(`https://json-server-db-three.vercel.app/ramens/${d.id}`, {
+             fetch(`https://json-server-ogfs.onrender.com/ramens/${d.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ const submitRaman = (ramen) =>{
         }
     // DELETE method
     const handleDelete = () => {
-        fetch(`https://json-server-db-three.vercel.app/ramens/${d.id}`, {
+        fetch(`https://json-server-ogfs.onrender.com/ramens/${d.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ let form = document.getElementById("new-ramen");
 form.addEventListener('submit', formSubmit);
 //  POST Method
 const handleCreate = (newObj) =>{
-    return fetch("https://json-server-db-three.vercel.app/ramens",{
+    return fetch("https://json-server-ogfs.onrender.com/ramens",{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newObj)
